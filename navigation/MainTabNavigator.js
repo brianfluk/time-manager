@@ -5,8 +5,11 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
+import CalendarScreen from '../screens/CalendarScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import HomeScreenReference from '../screens/HomeScreen-reference';
+import Colors from '../constants/Colors';
+
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -19,7 +22,6 @@ const HomeReferenceStack = createStackNavigator(
   },
   config
 );
-
 HomeReferenceStack.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarIcon: ({ focused }) => (
@@ -33,7 +35,6 @@ HomeReferenceStack.navigationOptions = {
     />
   ),
 };
-
 HomeReferenceStack.path = '';
 
 const HomeStack = createStackNavigator(
@@ -42,9 +43,8 @@ const HomeStack = createStackNavigator(
   },
   config
 );
-
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: 'Tasks',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -56,39 +56,21 @@ HomeStack.navigationOptions = {
     />
   ),
 };
-
 HomeStack.path = '';
 
-// const LinksStack = createStackNavigator(
-//   {
-//     Links: LinksScreen,
-//   },
-//   config
-// );
-
-// LinksStack.navigationOptions = {
-//   tabBarLabel: 'Links',
-//   tabBarIcon: ({ focused }) => (
-//     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-//   ),
-// };
-
-// LinksStack.path = '';
-
+// originally links stack
 const CalendarStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Calendar: CalendarScreen,
   },
   config
 );
-
 CalendarStack.navigationOptions = {
   tabBarLabel: 'Calendar',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-calendar' : 'md-calendar'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'md-calendar' : 'md-calendar'} />
   ),
 };
-
 CalendarStack.path = '';
 
 const SettingsStack = createStackNavigator(
@@ -97,23 +79,37 @@ const SettingsStack = createStackNavigator(
   },
   config
 );
-
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-person' : 'ios-person'} />
   ),
 };
-
 SettingsStack.path = '';
 
-const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  HomeReferenceStack,
-  // LinksStack,
-  CalendarStack,
-  SettingsStack,
-});
+const tabNavigator = createBottomTabNavigator(
+  {
+    HomeStack,
+    // HomeReferenceStack,
+    CalendarStack,
+    SettingsStack,
+  },
+  {
+    headerMode: 'none',
+    tabBarOptions: {
+      activeTintColor: Colors.tabTextSelected,
+      inactiveTintColor: Colors.tabTextDefault,
+      style: {
+        backgroundColor: 'black',
+        borderTopColor: 'black',
+      },
+      labelStyle: {
+        fontSize: 13,
+
+      }
+    },
+  }
+);
 
 tabNavigator.path = '';
 
