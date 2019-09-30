@@ -16,10 +16,9 @@ const config = Platform.select({
   default: {},
 });
 
+
 const HomeReferenceStack = createStackNavigator(
-  {
-    HomeReference: HomeScreenReference,
-  },
+  { HomeReference: HomeScreenReference, },
   config
 );
 HomeReferenceStack.navigationOptions = {
@@ -40,6 +39,7 @@ HomeReferenceStack.path = '';
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
+    Settings: SettingsScreen,
   },
   config
 );
@@ -60,9 +60,7 @@ HomeStack.path = '';
 
 // originally links stack
 const CalendarStack = createStackNavigator(
-  {
-    Calendar: CalendarScreen,
-  },
+  { Calendar: CalendarScreen, },
   config
 );
 CalendarStack.navigationOptions = {
@@ -74,9 +72,7 @@ CalendarStack.navigationOptions = {
 CalendarStack.path = '';
 
 const SettingsStack = createStackNavigator(
-  {
-    Settings: SettingsScreen,
-  },
+  { Settings: SettingsScreen, },
   config
 );
 SettingsStack.navigationOptions = {
@@ -87,12 +83,12 @@ SettingsStack.navigationOptions = {
 };
 SettingsStack.path = '';
 
+
 const tabNavigator = createBottomTabNavigator(
   {
     HomeStack,
     // HomeReferenceStack,
     CalendarStack,
-    SettingsStack,
   },
   {
     headerMode: 'none',
@@ -110,7 +106,6 @@ const tabNavigator = createBottomTabNavigator(
     },
   }
 );
-
 tabNavigator.path = '';
 
 export default tabNavigator;

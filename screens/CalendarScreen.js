@@ -29,7 +29,7 @@ CalendarScreen.navigationOptions = {
   },
   headerTitleStyle: {
     color: '#fff',
-  }
+  },
 };
 
 const styles = StyleSheet.create({

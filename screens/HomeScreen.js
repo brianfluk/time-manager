@@ -1,5 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import Touchable from 'react-native-platform-touchable';
+import TabBarIcon from '../components/TabBarIcon';
 import React from 'react';
 import {
   ScrollView,
@@ -10,24 +11,39 @@ import {
   SafeAreaView,
 } from 'react-native';
 
-class HeaderComponent extends React.Component {
-  render() {
-    return (
-      <Text style={{fontSize: 30, color: 'white'}}>
-        <Text style={{fontSize: 30, color: 'white', textAlign: 'center'}}>
-        Tasks {'\n'}
-        </Text>
-        
-        <Text style={{fontSize: 14, color: 'white', textAlign: 'center'}}>
-          Monday, September 30, 2019
-        </Text>
-      </Text>
-    )
+export default class HomeScreen extends React.Component {
+  constructor(props) {
+    super(props);
   }
-}
 
-export default function HomeScreen() {
-  return (
+  static navigationOptions = ({navigation}) => {
+    return {
+      title: 'Tasks',
+      headerStyle: {
+        backgroundColor: '#000',
+        borderBottomColor: '#000',
+      },
+      headerTitleStyle: {
+        color: '#fff',
+        fontSize: 17,
+        textAlign: 'left',
+      },
+      headerLeft: <TouchableOpacity 
+        onPress={() => navigation.navigate('Settings')}
+        hitSlop={{top: 20, left: 20, right: 20, bottom: 10}}
+        style={{paddingLeft: 12}}>
+          <TabBarIcon
+            name={
+              'md-settings'
+            }
+          />
+      </TouchableOpacity>,
+    }
+  }
+  
+  render() {
+    const { navigate } = this.props.navigation;
+    return (
     <SafeAreaView style={styles.container}>
       <ScrollView
         style={[styles.container, styles.todoListContainer]}
@@ -43,26 +59,10 @@ export default function HomeScreen() {
             </Text>
           </Touchable>)
         })}
-
       </ScrollView>
     </SafeAreaView>
   );
-}
-
-HomeScreen.navigationOptions = {
-  title: 'Tasks',
-  headerStyle: {
-    backgroundColor: '#000',
-    borderBottomColor: '#000',
-    // height: 80,
-  },
-  headerTitleStyle: {
-    color: '#fff',
-    fontSize: 17,
-    textAlign: 'left',
-  },
-  // headerTitle: <HeaderComponent />
-};
+}}
 
 const sampleData = [
   {
