@@ -7,7 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import CalendarScreen from '../screens/CalendarScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import HomeScreenReference from '../screens/HomeScreen-reference';
+import NewTaskScreen from '../screens/NewTaskScreen';
 import Colors from '../constants/Colors';
 
 
@@ -17,29 +17,11 @@ const config = Platform.select({
 });
 
 
-const HomeReferenceStack = createStackNavigator(
-  { HomeReference: HomeScreenReference, },
-  config
-);
-HomeReferenceStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `${focused ? 'ios-information-circle' : 'ios-information-circle'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-};
-HomeReferenceStack.path = '';
-
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
     Settings: SettingsScreen,
+    NewTask: NewTaskScreen,
   },
   config
 );
@@ -87,7 +69,6 @@ SettingsStack.path = '';
 const tabNavigator = createBottomTabNavigator(
   {
     HomeStack,
-    // HomeReferenceStack,
     CalendarStack,
   },
   {

@@ -38,31 +38,41 @@ export default class HomeScreen extends React.Component {
             }
           />
       </TouchableOpacity>,
+      headerRight: <TouchableOpacity 
+      onPress={() => navigation.navigate('NewTask')}
+      hitSlop={{top: 20, left: 20, right: 20, bottom: 10}}
+      style={{paddingRight: 12}}>
+        <TabBarIcon
+          name={
+            'md-add-circle'
+          }
+        />
+    </TouchableOpacity>,
     }
   }
   
   render() {
-    const { navigate } = this.props.navigation;
     return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView
-        style={[styles.container, styles.todoListContainer]}
-        contentContainerStyle={styles.contentContainer}>
-        
-        {sampleData.map((goal, key) => {
-          return (<Touchable style={styles.todoListItem} key={key}>
-            <Text style={styles.todoListText}>
-              {goal.title} {'\n'}
-              <Text style={{fontSize: 17, color: 'grey', fontWeight: 'normal'}}>
-              Daily goals: {goal.daily_done} / {goal.daily_quota}
+      <SafeAreaView style={styles.container}>
+        <ScrollView
+          style={[styles.container, styles.todoListContainer]}
+          contentContainerStyle={styles.contentContainer}>
+          
+          {sampleData.map((goal, key) => {
+            return (<Touchable style={styles.todoListItem} key={key}>
+              <Text style={styles.todoListText}>
+                {goal.title} {'\n'}
+                <Text style={{fontSize: 17, color: 'grey', fontWeight: 'normal'}}>
+                Daily goals: {goal.daily_done} / {goal.daily_quota}
+                </Text>
               </Text>
-            </Text>
-          </Touchable>)
-        })}
-      </ScrollView>
-    </SafeAreaView>
-  );
-}}
+            </Touchable>)
+          })}
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+}
 
 const sampleData = [
   {
