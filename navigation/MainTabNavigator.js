@@ -16,7 +16,6 @@ const config = Platform.select({
   default: {},
 });
 
-
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
@@ -40,7 +39,6 @@ HomeStack.navigationOptions = {
 };
 HomeStack.path = '';
 
-// originally links stack
 const CalendarStack = createStackNavigator(
   { Calendar: CalendarScreen, },
   config

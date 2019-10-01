@@ -7,6 +7,11 @@ import {
   StyleSheet,
   Text,
   ScrollView,
+  TextInput,
+  Button,
+  FormLabel,
+  FormInput,
+  FormValidationMessage
 } from 'react-native';
 
 export default class NewTaskScreen extends React.Component {
@@ -14,9 +19,20 @@ export default class NewTaskScreen extends React.Component {
     super(props)
     this.state = {
       fields: {
-        "title": "",
-        "daily_goal": "",
-        "total_goal": ""
+        'title': {
+          'name': 'Task',
+          'value': ''
+        },
+        'daily_goal': {
+          'name': 'Daily goals (hours)',
+          'value': '',
+          'keyboardType': 'number-pad',
+        },
+        'total_goal': {
+          'name': 'Total goal (hours)',
+          'value': '',
+          'keyboardType': 'number-pad',
+        },
       }
     }
   }
@@ -35,16 +51,42 @@ export default class NewTaskScreen extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
+      
         <ScrollView 
         style={styles.container}
         contentContainerStyle={[styles.contentContainer, styles.todoListContainer]}>
           {Object.keys(this.state.fields).map((field, key) => {
             return (
-              <Text style={{color: 'white', fontSize: 17}}>
-              {field}
-              </Text>
+              <View key={key} style={{marginBottom: 12, display:'flex'}}>
+                <Text style={{
+                  color: '#555', 
+                  fontSize: 17, 
+                  flex: 1,
+                }}>
+                  {this.state.fields[field].name}
+                </Text>
+                <TextInput 
+                  keyboardAppearance={'dark'}
+                  keyboardType={
+                    this.state.fields[field].keyboardType ? 
+                    this.state.fields[field].keyboardType : 'default'}
+                  style={{
+                    height: 50,
+                    backgroundColor: '#222',
+                    borderRadius: 3,
+                    paddingHorizontal: 7,
+                    color: 'white',
+                    fontSize: 24,
+                    flex: 1,
+                  }}
+                  // onEndEditing={this.setState(field)}
+                ></TextInput>
+              </View>
             )
           })}
+          <Button
+          title={'Create'}>
+          </Button>
         </ScrollView>
       </SafeAreaView>
     )

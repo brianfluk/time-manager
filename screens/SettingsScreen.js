@@ -5,37 +5,32 @@ import {
   SafeAreaView,
   View,
   StyleSheet,
-  Image,
   Text,
   ScrollView,
 } from 'react-native';
 
-export default function SettingsScreen() {
-  /**
-   * Go ahead and delete ExpoConfigView and replace it with your content;
-   * we just wanted to give you a quick view of your config.
-   */
-  // return <ExpoConfigView />;
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView 
-      style={styles.container}
-      contentContainerStyle={[styles.contentContainer, styles.todoListContainer]}>
-        <View>
-          {settingsData.map(((setting, i) => {
-            return (
-              <Touchable key={i} style={{paddingBottom: 22}}>
-                <Text style={{color: 'white', fontSize: 17}}>
-                  {setting.title}
-                </Text>
-              </Touchable>
-            )
-          }))}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  )
+export default class SettingsScreen extends React.Component {
+  render() {
+    return (
+      <SafeAreaView style={styles.container}>
+        <ScrollView 
+        style={styles.container}
+        contentContainerStyle={[styles.contentContainer, styles.todoListContainer]}>
+          <View>
+            {settingsData.map(((setting, i) => {
+              return (
+                <Touchable key={i} style={{paddingBottom: 22}}>
+                  <Text style={{color: 'white', fontSize: 17}}>
+                    {setting.title}
+                  </Text>
+                </Touchable>
+              )
+            }))}
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    )
+  }
 }
 
 SettingsScreen.navigationOptions = {
@@ -94,9 +89,17 @@ const settingsData = [
     ]
   },
   {
-    "title": "Theme and Appearance",
+    "title": "Theme and appearance",
     "details": [
       
+    ]
+  },
+  {
+    "title": "Display options",
+    "details": [
+      {
+        "title": "Show next event on main display"
+      }
     ]
   },
   {
